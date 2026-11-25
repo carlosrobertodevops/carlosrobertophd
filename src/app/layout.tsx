@@ -6,6 +6,7 @@ import type { Metadata } from 'next'
 
 import { ThemeProvider } from '@/components/theme-provider'
 import { LocaleProvider } from '@/components/locale-provider'
+import { getServerDictionary } from '@/i18n/server'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { Toaster } from '@/components/ui/sonner'
 import CustomCursor from '@/components/layout/custom-cursor'
@@ -37,84 +38,85 @@ const satoshi = localFont({
   ]
 })
 
-export const metadata: Metadata = {
-  title: {
-    template: '%s - Carlos Roberto',
-    default: 'Carlos Roberto - Portfolio Landing page'
-  },
-  description:
-    'Carlos Roberto é um moderno portfólio de Landing Page construído com Next.js para designers, desenvolvedores, freelancers e agências criarem sites rápidos, responsivos e otimizados para SEO.',
-  robots: 'index,follow',
-  keywords: ['keyword1', 'keyword2', 'keyword3'],
-  icons: {
-    icon: [
-      {
-        url: '/favicon/favicon-16x16.png',
-        sizes: '16x16',
-        type: 'image/png'
-      },
-      {
-        url: '/favicon/favicon-32x32.png',
-        sizes: '32x32',
-        type: 'image/png'
-      },
-      {
-        url: '/favicon/favicon.ico',
-        sizes: '48x48',
-        type: 'image/x-icon'
-      }
-    ],
-    apple: [
-      {
-        url: '/favicon/apple-touch-icon.png',
-        sizes: '180x180',
-        type: 'image/png'
-      }
-    ],
-    other: [
-      {
-        url: '/favicon/android-chrome-192x192.png',
-        rel: 'icon',
-        sizes: '192x192',
-        type: 'image/png'
-      },
-      {
-        url: '/favicon/android-chrome-512x512.png',
-        rel: 'icon',
-        sizes: '512x512',
-        type: 'image/png'
-      }
-    ]
-  },
-  metadataBase: new URL(`${process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'}`),
-  openGraph: {
+export const generateMetadata = async (): Promise<Metadata> => {
+  const dictionary = await getServerDictionary()
+
+  return {
     title: {
-      template: '%s - Carlos Roberto',
-      default: 'Carlos Roberto - Portfolio Landing page'
+      template: `%s - ${dictionary.siteMeta.siteName}`,
+      default: dictionary.siteMeta.title
     },
-    description:
-      'Carlos Roberto é um moderno portfólio de Landing Page construído com Next.js para designers, desenvolvedores, freelancers e agências criarem sites rápidos, responsivos e otimizados para SEO.',
-    type: 'website',
-    siteName: 'Carlos Roberto',
-    url: `${process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'}`,
-    images: [
-      {
-        url: '/images/og-image.png',
-        type: 'image/png',
-        width: 1200,
-        height: 630,
-        alt: 'Portfolio Landing page'
-      }
-    ]
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: {
-      template: '%s - Carlos Roberto',
-      default: 'Carlos Roberto - Portfolio Landing page'
+    description: dictionary.siteMeta.description,
+    robots: 'index,follow',
+    keywords: ['Carlos Roberto', 'Arquiteto de Software', 'Engenheiro de Software', 'DevOps', 'Full-stack'],
+    icons: {
+      icon: [
+        {
+          url: '/favicon/favicon-16x16.png',
+          sizes: '16x16',
+          type: 'image/png'
+        },
+        {
+          url: '/favicon/favicon-32x32.png',
+          sizes: '32x32',
+          type: 'image/png'
+        },
+        {
+          url: '/favicon/favicon.ico',
+          sizes: '48x48',
+          type: 'image/x-icon'
+        }
+      ],
+      apple: [
+        {
+          url: '/favicon/apple-touch-icon.png',
+          sizes: '180x180',
+          type: 'image/png'
+        }
+      ],
+      other: [
+        {
+          url: '/favicon/android-chrome-192x192.png',
+          rel: 'icon',
+          sizes: '192x192',
+          type: 'image/png'
+        },
+        {
+          url: '/favicon/android-chrome-512x512.png',
+          rel: 'icon',
+          sizes: '512x512',
+          type: 'image/png'
+        }
+      ]
     },
-    description:
-      'Carlos Roberto é um moderno portfólio de Landing Page construído com Next.js para designers, desenvolvedores, freelancers e agências criarem sites rápidos, responsivos e otimizados para SEO.'
+    metadataBase: new URL(`${process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'}`),
+    openGraph: {
+      title: {
+        template: `%s - ${dictionary.siteMeta.siteName}`,
+        default: dictionary.siteMeta.title
+      },
+      description: dictionary.siteMeta.description,
+      type: 'website',
+      siteName: dictionary.siteMeta.siteName,
+      url: `${process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'}`,
+      images: [
+        {
+          url: '/images/og-image.png',
+          type: 'image/png',
+          width: 1200,
+          height: 630,
+          alt: dictionary.siteMeta.title
+        }
+      ]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: {
+        template: `%s - ${dictionary.siteMeta.siteName}`,
+        default: dictionary.siteMeta.title
+      },
+      description: dictionary.siteMeta.description
+    }
   }
 }
 

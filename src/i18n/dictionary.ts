@@ -23,9 +23,9 @@ export const dictionary = {
     hero: {
       greeting: 'Olá',
       intro: 'Eu sou {name}',
-      title: 'Engenheiro de Design, PhD, DevOps, full-stack — 25+ anos de experiência',
+      title: 'Arquiteto e Engenheiro de Software',
       description:
-        'Engenheiro de Design com PhD e certificação DevOps, 25+ anos de experiência em full-stack. Não faço apenas a ponte entre design e engenharia — assumo a experiência inteira, do primeiro rascunho ao produto final.',
+        'PhD, certificação DevOps e 25+ anos de experiência full-stack. Assumo a experiência inteira, do primeiro rascunho ao produto final.',
       downloadCv: 'Baixar CV',
       contactCta: 'Vamos nos conectar'
     },
@@ -66,7 +66,7 @@ export const dictionary = {
       timeline: [
         {
           company: 'Lumio',
-          role: 'Engenheiro de Design',
+          role: 'Arquiteto e Engenheiro de Software',
           period: '2025 -',
           status: { text: 'Atual', tone: 'positive' as const },
           stack: ['React', 'Figma', 'Design system', 'Tailwind'],
@@ -85,7 +85,7 @@ export const dictionary = {
         },
         {
           company: 'Orion Labs',
-          role: 'Engenheiro de Design Freelancer',
+          role: 'Arquiteto e Engenheiro de Software (Freelance)',
           period: '2023, 5 meses',
           stack: ['Framer', 'Motion design', 'Design visual', 'Copywriting'],
           achievement: 'Projetei e entreguei um site de marketing completo sozinho em menos de uma semana',
@@ -262,7 +262,7 @@ export const dictionary = {
       emailError: 'Digite um endereço de e-mail válido.',
       serviceError: 'Selecione um serviço.',
       messageError: 'A mensagem deve ter pelo menos 10 caracteres.',
-      role: 'Engenheiro de Design, PhD, DevOps — full-stack'
+      role: 'Arquiteto e Engenheiro de Software'
     },
     caseStudy: {
       backToHome: 'Voltar ao início',
@@ -288,13 +288,13 @@ export const dictionary = {
     contactMeta: {
       title: 'Contato',
       description: 'Entre em contato conosco. Estamos aqui para ajudar e responder suas perguntas.',
-      jsonLdDescription: 'Engenheiro de Design baseado em Maceió, AL, Brasil.'
+      jsonLdDescription: 'Arquiteto e Engenheiro de Software baseado em Maceió, AL, Brasil.'
     },
     siteMeta: {
-      title: 'Carlos Roberto - Portfolio Landing page',
+      title: 'Carlos Roberto - Arquiteto e Engenheiro de Software',
       description:
-        'Portfólio pessoal de Carlos Roberto - Engenheiro de Design, PhD, DevOps e full-stack com 25+ anos de experiência.',
-      jsonLdDescription: 'Engenheiro de Design baseado em Austin.',
+        'Portfólio de Carlos Roberto - Arquiteto e Engenheiro de Software, PhD, DevOps e full-stack.',
+      jsonLdDescription: 'Arquiteto e Engenheiro de Software baseado em Maceió, AL, Brasil.',
       siteName: 'Carlos Roberto'
     }
   },
@@ -321,9 +321,9 @@ export const dictionary = {
     hero: {
       greeting: 'Hello',
       intro: 'I am {name}',
-      title: 'Senior Engineer, PhD, DevOps, full-stack — 25+ years of experience',
+      title: 'Software Architect & Engineer',
       description:
-        "Design engineer with a PhD and DevOps certification, 25+ years of full-stack experience. I don't just bridge design and engineering - I own the entire experience, from the first sketch to the final shipped product.",
+        "PhD, DevOps certification and 25+ years of full-stack experience. I own the entire experience, from the first sketch to the final shipped product.",
       downloadCv: 'Download CV',
       contactCta: "Let's connect"
     },
@@ -364,7 +364,7 @@ export const dictionary = {
       timeline: [
         {
           company: 'Lumio',
-          role: 'Design Engineer',
+          role: 'Software Architect & Engineer',
           period: '2025 -',
           status: { text: 'Present', tone: 'positive' as const },
           stack: ['React', 'Figma', 'Design system', 'Tailwind'],
@@ -383,7 +383,7 @@ export const dictionary = {
         },
         {
           company: 'Orion Labs',
-          role: 'Freelance Design Engineer',
+          role: 'Software Architect & Engineer (Freelance)',
           period: '2023, 5 Months',
           stack: ['Framer', 'Motion design', 'Visual design', 'Copywriting'],
           achievement: 'Designed and shipped a full marketing site solo in under a week',
@@ -559,7 +559,7 @@ export const dictionary = {
       serviceError: 'Please select a service.',
       messageError: 'Message must be at least 10 characters.',
       success: "Message sent — I'll get back to you as soon as possible.",
-      role: 'Design engineer'
+      role: 'Software Architect & Engineer'
     },
     caseStudy: {
       backToHome: 'Back to home',
@@ -585,13 +585,13 @@ export const dictionary = {
     contactMeta: {
       title: 'Contact Us',
       description: "Get in touch with us. We're here to help and answer any questions you may have.",
-      jsonLdDescription: 'Design engineer based in Maceió, AL, Brazil.'
+      jsonLdDescription: 'Software Architect & Engineer based in Maceió, AL, Brazil.'
     },
     siteMeta: {
-      title: 'Carlos Roberto - Portfolio Landing page',
+      title: 'Carlos Roberto - Software Architect & Engineer',
       description:
-        'Personal portfolio of Carlos Roberto - Design Engineer, PhD, DevOps and full-stack with 25+ years of experience.',
-      jsonLdDescription: 'Design engineer based in Austin.',
+        'Portfolio of Carlos Roberto - Software Architect & Engineer, PhD, DevOps and full-stack.',
+      jsonLdDescription: 'Software Architect & Engineer based in Maceió, AL, Brazil.',
       siteName: 'Carlos Roberto'
     }
   },
@@ -618,9 +618,9 @@ export const dictionary = {
     hero: {
       greeting: 'Hola',
       intro: 'Soy {name}',
-      title: 'Ingeniero Senior, PhD, DevOps, full-stack — más de 25 años de experiencia',
+      title: 'Arquitecto e Ingeniero de Software',
       description:
-        'Ingeniero de diseño con doctorado y certificación DevOps, más de 25 años de experiencia full-stack. No solo hago de puente entre diseño e ingeniería: asumo la experiencia completa, del primer boceto hasta el producto final.',
+        'Doctorado, certificación DevOps y más de 25 años de experiencia full-stack. Asumo la experiencia completa, del primer boceto hasta el producto final.',
       downloadCv: 'Descargar CV',
       contactCta: 'Conectemos'
     },
@@ -661,7 +661,7 @@ export const dictionary = {
       timeline: [
         {
           company: 'Lumio',
-          role: 'Ingeniero de Diseño',
+          role: 'Arquitecto e Ingeniero de Software',
           period: '2025 -',
           status: 'Actual',
           stack: ['React', 'Figma', 'Design system', 'Tailwind'],
@@ -680,7 +680,7 @@ export const dictionary = {
         },
         {
           company: 'Orion Labs',
-          role: 'Ingeniero de Diseño Freelance',
+          role: 'Arquitecto e Ingeniero de Software (Freelance)',
           period: '2023, 5 meses',
           stack: ['Framer', 'Motion design', 'Diseño visual', 'Copywriting'],
           achievement: 'Diseñé y entregué un sitio de marketing completo en solitario en menos de una semana',
@@ -856,7 +856,7 @@ export const dictionary = {
       emailError: 'Introduce una dirección de correo válida.',
       serviceError: 'Selecciona un servicio.',
       messageError: 'El mensaje debe tener al menos 10 caracteres.',
-      role: 'Ingeniero de diseño'
+      role: 'Arquitecto e Ingeniero de Software'
     },
     caseStudy: {
       backToHome: 'Volver al inicio',
@@ -882,13 +882,13 @@ export const dictionary = {
     contactMeta: {
       title: 'Contacto',
       description: 'Ponte en contacto con nosotros. Estamos aquí para ayudarte y responder tus preguntas.',
-      jsonLdDescription: 'Ingeniero de diseño basado en Maceió, AL, Brasil.'
+      jsonLdDescription: 'Arquitecto e Ingeniero de Software basado en Maceió, AL, Brasil.'
     },
     siteMeta: {
-      title: 'Carlos Roberto - Portfolio Landing page',
+      title: 'Carlos Roberto - Arquitecto e Ingeniero de Software',
       description:
-        'Portafolio personal de Carlos Roberto: ingeniero de diseño, PhD, DevOps y full-stack con más de 25 años de experiencia.',
-      jsonLdDescription: 'Ingeniero de diseño basado en Austin.',
+        'Portafolio de Carlos Roberto - Arquitecto e Ingeniero de Software, PhD, DevOps y full-stack.',
+      jsonLdDescription: 'Arquitecto e Ingeniero de Software basado en Maceió, AL, Brasil.',
       siteName: 'Carlos Roberto'
     }
   }
