@@ -26,7 +26,7 @@ const ReadingProgressPill = ({ headings, contentId }: ReadingProgressPillProps) 
   const { dictionary } = useLocale()
   const [percent, setPercent] = useState(0)
   const [activeSlug, setActiveSlug] = useState('')
-  const [activeLabel, setActiveLabel] = useState(dictionary.caseStudy.points)
+  const [activeLabel, setActiveLabel] = useState<string>(dictionary.caseStudy.points)
   const [isOpen, setIsOpen] = useState(false)
 
   const containerRef = useRef<HTMLDivElement>(null)
@@ -60,7 +60,7 @@ const ReadingProgressPill = ({ headings, contentId }: ReadingProgressPillProps) 
         .filter((el): el is HTMLElement => Boolean(el))
 
       let currentSlug = ''
-      let currentLabel = dictionary.caseStudy.points
+      let currentLabel: string = dictionary.caseStudy.points
 
       for (let i = headingElements.length - 1; i >= 0; i--) {
         const heading = headingElements[i]

@@ -10,24 +10,27 @@ import SelectService from '@/components/home/select-service/select-service'
 
 // Data Imports
 import { getCaseStudies } from '@/lib/case-studies'
-
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@context': 'https://schema.org',
-      '@type': 'WebSite',
-      '@id': `${process.env.NEXT_PUBLIC_APP_URL}#website`,
-      name: 'Carlos Roberto',
-      description: 'Engenheiro de Design baseado em Austin.',
-      url: `${process.env.NEXT_PUBLIC_APP_URL}`,
-      inLanguage: 'pt-BR'
-    }
-  ]
-}
+import { getServerDictionary, getServerLocale } from '@/i18n/server'
 
 const Home = async () => {
-  const caseStudies = await getCaseStudies()
+  const locale = await getServerLocale()
+  const dictionary = await getServerDictionary()
+  const caseStudies = await getCaseStudies(undefined, locale)
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        '@id': `${process.env.NEXT_PUBLIC_APP_URL}#website`,
+        name: dictionary.siteMeta.siteName,
+        description: dictionary.siteMeta.jsonLdDescription,
+        url: `${process.env.NEXT_PUBLIC_APP_URL}`,
+        inLanguage: locale
+      }
+    ]
+  }
 
   return (
     <>

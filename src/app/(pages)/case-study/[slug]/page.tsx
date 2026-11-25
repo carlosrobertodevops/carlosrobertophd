@@ -23,7 +23,7 @@ import { getServerDictionary, getServerLocale } from '@/i18n/server'
 import { extractHeadings } from '@/lib/extract-headings'
 
 export async function generateStaticParams() {
-  const caseStudies = await getCaseStudies()
+  const caseStudies = await getCaseStudies(undefined, 'pt-BR')
 
   return caseStudies.map(caseStudy => ({ slug: caseStudy.slug }))
 }
@@ -31,7 +31,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
 
-  const caseStudy = await getCaseStudyBySlug(slug)
+  const caseStudy = await getCaseStudyBySlug(slug, await getServerLocale())
 
   if (!caseStudy) {
     return {}
@@ -53,9 +53,10 @@ export const dynamicParams = false
 
 const CaseStudyDetailsPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params
-  const caseStudies = await getCaseStudies()
+  const locale = await getServerLocale()
+  const caseStudies = await getCaseStudies(undefined, locale)
 
-  const caseStudy = await getCaseStudyBySlug(slug)
+  const caseStudy = await getCaseStudyBySlug(slug, locale)
 
   if (!caseStudy) {
     notFound()
@@ -63,7 +64,6 @@ const CaseStudyDetailsPage = async ({ params }: { params: Promise<{ slug: string
 
   const { metadata, content } = caseStudy
   const dictionary = await getServerDictionary()
-  const locale = await getServerLocale()
 
   const otherCaseStudies = caseStudies.filter(item => item.slug !== slug).slice(0, 2)
   const headings = extractHeadings(content)
