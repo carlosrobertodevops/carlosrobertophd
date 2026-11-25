@@ -1,8 +1,11 @@
+'use client'
+
 // Type Imports
 import type { CaseStudyMetadata } from '@/lib/case-studies'
 
 // Component Imports
 import Eyebrow from '@/components/shared/eyebrow/eyebrow'
+import { useLocale } from '@/components/locale-provider'
 import FeaturedWorkCard from './featured-work-card'
 import { cn } from '@/lib/utils'
 
@@ -31,17 +34,21 @@ const chunkIntoCycles = (caseStudies: CaseStudyMetadata[]): CaseStudyMetadata[][
 const FeaturedWorks = ({
   caseStudies,
   id = 'featured-works',
-  eyebrow = 'Featured works',
-  title = 'These are ones that taught me the most',
+  eyebrow,
+  title,
   layout = 'bento',
   showBorder = true
 }: FeaturedWorksProps) => {
+  const { dictionary } = useLocale()
+
   return (
     <section id={id} className={cn('py-8 sm:py-16 lg:py-24', showBorder && 'border-b')}>
       <div className='mx-auto max-w-7xl space-y-8 px-4 sm:px-6 lg:space-y-16 lg:px-10.5'>
         <div className='space-y-2'>
-          <Eyebrow>{eyebrow}</Eyebrow>
-          <h2 className='text-2xl font-semibold md:text-3xl lg:text-4xl'>{title}</h2>
+          <Eyebrow>{eyebrow ?? dictionary.featuredWorks.eyebrow}</Eyebrow>
+          <h2 className='text-2xl font-semibold md:text-3xl lg:text-4xl'>
+            {title ?? dictionary.featuredWorks.title}
+          </h2>
         </div>
 
         {layout === 'vertical' ? (

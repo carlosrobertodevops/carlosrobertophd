@@ -3,6 +3,9 @@ import path from 'path' // Comment this line if using remote fetching
 
 import matter from 'gray-matter'
 
+import { DEFAULT_LOCALE, isLocale } from '@/i18n/locales'
+import type { Locale } from '@/i18n/locales'
+
 export type CaseStudy = {
   metadata: CaseStudyMetadata
   content: string
@@ -25,9 +28,25 @@ export type CaseStudyMetadata = {
 // local content directory (comment below line if using remote fetching)
 const rootDirectory = path.join(process.cwd(), 'src', 'content', 'case-studies')
 
-export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy | null> {
+// Resolve o diretório do idioma, com fallback para en-US e depois para a raiz
+const resolveDirectory = (locale?: Locale): string => {
+  if (locale) {
+    const localized = path.join(rootDirectory, locale)
+
+    if (fs.existsSync(localized)) return localized
+  }
+
+  const fallback = path.join(rootDirectory, DEFAULT_LOCALE)
+
+  if (fs.existsSync(fallback)) return fallback
+
+  return rootDirectory
+}
+
+export async function getCaseStudyBySlug(slug: string, locale?: Locale): Promise<CaseStudy | null> {
   try {
-    const filePath = path.join(rootDirectory, `${slug}.mdx`)
+    const directory = resolveDirectory(locale)
+    const filePath = path.join(directory, `${slug}.mdx`)
     const fileContent = fs.readFileSync(filePath, { encoding: 'utf8' })
 
     const { data, content } = matter(fileContent)
@@ -38,10 +57,11 @@ export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy | null
   }
 }
 
-export async function getCaseStudies(limit?: number): Promise<CaseStudyMetadata[]> {
+export async function getCaseStudies(limit?: number, locale?: Locale): Promise<CaseStudyMetadata[]> {
   try {
-    const files = fs.readdirSync(rootDirectory)
-    const caseStudies = await Promise.all(files.map(async (file: any) => await getCaseStudyMetadata(file)))
+    const directory = resolveDirectory(locale)
+    const files = fs.readdirSync(directory).filter(file => file.endsWith('.mdx'))
+    const caseStudies = await Promise.all(files.map(async (file: any) => await getCaseStudyMetadata(file, locale)))
 
     // Sort case studies by published date
     const sortedCaseStudies = caseStudies.sort((a, b) => {
@@ -64,11 +84,14 @@ export async function getCaseStudies(limit?: number): Promise<CaseStudyMetadata[
   }
 }
 
-export async function getCaseStudyMetadata(filepath: string): Promise<CaseStudyMetadata> {
+export async function getCaseStudyMetadata(
+  filepath: string,
+  locale?: Locale
+): Promise<CaseStudyMetadata> {
   try {
     const slug = filepath.replace(/\.mdx$/, '')
 
-    const filePath = path.join(rootDirectory, filepath)
+    const filePath = path.join(resolveDirectory(locale), filepath)
     const fileContent = fs.readFileSync(filePath, { encoding: 'utf8' })
 
     const { data } = matter(fileContent)
@@ -80,3 +103,5 @@ export async function getCaseStudyMetadata(filepath: string): Promise<CaseStudyM
     return { slug: filepath.replace(/\.mdx$/, '') }
   }
 }
+
+export { isLocale }

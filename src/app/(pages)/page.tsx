@@ -18,10 +18,10 @@ const jsonLd = {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       '@id': `${process.env.NEXT_PUBLIC_APP_URL}#website`,
-      name: 'Zolt Mercer',
-      description: 'Design engineer based in Austin.',
+      name: 'Carlos Roberto',
+      description: 'Engenheiro de Design baseado em Austin.',
       url: `${process.env.NEXT_PUBLIC_APP_URL}`,
-      inLanguage: 'en-US'
+      inLanguage: 'pt-BR'
     }
   ]
 }

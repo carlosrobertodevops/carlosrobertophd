@@ -10,8 +10,8 @@ import Testimonials from '@/components/shared/testimonials/testimonials'
 import { getCaseStudies } from '@/lib/case-studies'
 
 export const metadata: Metadata = {
-  title: 'Contact Us',
-  description: "Get in touch with us. We're here to help and answer any questions you may have.",
+  title: 'Contato',
+  description: 'Entre em contato conosco. Estamos aqui para ajudar e responder suas perguntas.',
   keywords: ['keyword1', 'keyword2', 'keyword3'],
   alternates: {
     canonical: `${process.env.NEXT_PUBLIC_APP_URL}/contact`
@@ -25,17 +25,17 @@ const jsonLd = {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       '@id': `${process.env.NEXT_PUBLIC_APP_URL}#website`,
-      name: 'Zolt Mercer',
-      description: 'Design engineer based in Austin.',
+      name: 'Carlos Roberto',
+      description: 'Engenheiro de Design baseado em Austin.',
       url: `${process.env.NEXT_PUBLIC_APP_URL}`,
-      inLanguage: 'en-US'
+      inLanguage: 'pt-BR'
     },
     {
       '@context': 'https://schema.org',
       '@type': 'WebPage',
       '@id': `${process.env.NEXT_PUBLIC_APP_URL}#webpage`,
-      name: 'Contact Us',
-      description: "Get in touch with us. We're here to help and answer any questions you may have.",
+      name: 'Contato',
+      description: 'Entre em contato conosco. Estamos aqui para ajudar e responder suas perguntas.',
       url: `${process.env.NEXT_PUBLIC_APP_URL}/contact`,
       isPartOf: {
         '@id': `${process.env.NEXT_PUBLIC_APP_URL}#website`
@@ -54,7 +54,7 @@ const ContactUsPage = async () => {
   return (
     <>
       <ContactHero />
-      <FeaturedWorks caseStudies={caseStudies} layout='vertical' title='Have a look at some of my work' />
+      <FeaturedWorks caseStudies={caseStudies} layout='vertical' title='Dê uma olhada em alguns dos meus trabalhos' />
       <Services />
       <Testimonials showBorder={false} />
 

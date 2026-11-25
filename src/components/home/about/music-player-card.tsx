@@ -11,6 +11,7 @@ import { AnimatePresence, motion } from 'motion/react'
 
 // Component Imports
 import { Card } from '@/components/ui/card'
+import { useLocale } from '@/components/locale-provider'
 
 // Util Imports
 import { cn } from '@/lib/utils'
@@ -26,6 +27,7 @@ const formatTime = (totalSeconds: number) => {
 }
 
 const MusicPlayerCard = () => {
+  const { dictionary } = useLocale()
   const [expanded, setExpanded] = useState(true)
   const [seconds, setSeconds] = useState(70)
 
@@ -52,7 +54,7 @@ const MusicPlayerCard = () => {
       >
         <Image
           src='/images/about-me/music.webp'
-          alt='See you again cover art'
+          alt={dictionary.about.coverAlt}
           fill
           sizes='auto'
           className='object-cover object-bottom'
@@ -93,8 +95,8 @@ const MusicPlayerCard = () => {
                 />
               ))}
             </span>
-            <p className='text-muted-foreground text-xs'>Tyler</p>
-            <p className='text-sm font-medium'>See you again</p>
+            <p className='text-muted-foreground text-xs'>{dictionary.about.artist}</p>
+            <p className='text-sm font-medium'>{dictionary.about.track}</p>
             <div className='bg-muted mx-auto h-px w-6' />
             <p className='text-muted-foreground flex items-center justify-center gap-1 text-xs tabular-nums'>
               <span className='flex'>

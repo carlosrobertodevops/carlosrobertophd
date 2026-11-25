@@ -1,0 +1,72 @@
+---
+slug: 'redesigning-the-core-dashboard-of-saas-product'
+title: 'Redesenhando o Dashboard Principal de um Produto SaaS'
+description: 'O dashboard antigo tinha 11 anos de dívida visual. Simplifiquei, reconstruí cada componente em React e entreguei uma versão que reduziu a evasão de usuários em 40%.'
+organisation: 'Trackflow HQ'
+role: 'Frontend + Designer'
+duration: '3 meses'
+tools: ['Next.js', 'React', 'Framer']
+publishedAt: '2026-03-01'
+image: '/images/features/page-02.webp'
+heroImage: '/images/case-study/trackflow-04.webp'
+logo: '/images/features/logo-03.webp'
+---
+
+## O Problema
+
+O dashboard tinha 11 anos de dívida visual — mais de 30 telas construídas por pessoas diferentes sem um sistema compartilhado. Os usuários abandonavam na tela central de workflow a uma taxa de 60%. Três times diferentes tinham construído UI de formas completamente diferentes e ninguém assumia a responsabilidade pelo problema.
+
+<div className='my-24 grid gap-4 sm:grid-cols-2'>
+  <div className='bg-card relative w-full overflow-hidden rounded-3xl p-1.5 dark:bg-white/10'>
+    <img
+      src='/images/case-study/trackflow-02.webp'
+      alt='Auditoria de botões, inputs e cards inconsistentes em todo o produto'
+      className='w-full rounded-3xl'
+    />
+  </div>
+  <div className='bg-card relative w-full overflow-hidden rounded-3xl p-1.5 dark:bg-white/10'>
+    <img
+      src='/images/case-study/trackflow-03.webp'
+      alt='Captura de tela anotada apontando uso inconsistente de raio, borda e cor'
+      className='w-full rounded-3xl'
+    />
+  </div>
+</div>
+
+## Meu papel
+
+Liderei o redesenho completo — pesquisa com usuários, arquitetura da informação, design visual e implementação frontend em Next.js. Trabalhei diretamente com o CTO e dois engenheiros ao longo de todo o processo.
+
+## Resultado
+
+- Evasão de usuários reduzida de 60% para 22% em 6 semanas de lançamento
+
+## Como resolvi
+
+Conduzi oito entrevistas com usuários focadas em workflows, e não em preferências estéticas. A insight principal foi:
+
+> Não tínhamos um problema de design. Tínhamos um problema de estrutura vestido de problema de design.
+
+A arquitetura da informação foi reestruturada em torno do job-to-be-done do usuário, e não da estrutura interna dos times. A implementação visual usou feature flags, permitindo deploy incremental entre seções enquanto media as métricas de evasão em cada fase.
+
+<div className='bg-card relative mt-24 w-full overflow-hidden rounded-3xl p-1.5 dark:bg-white/10'>
+  <img
+    src='/images/case-study/trackflow-01.webp'
+    alt='Dashboard construído sobre o novo sistema de componentes'
+    className='w-full rounded-3xl'
+  />
+</div>
+
+## O que foi entregue
+
+Um dashboard completamente reconstruído — hierarquia de informação mais limpa, 40% menos cliques para chegar às ações principais e um sistema de componentes consistente sobre o qual a engenharia agora constrói.
+
+O deploy incremental significou que os usuários experimentaram uma familiarização gradual com a nova UI, resultando em adoção suave sem uma troca disruptiva.
+
+## O que funcionou
+
+Lançar atrás de feature flags e medir o impacto em cada passo deu confiança a todo o time. Fechar a arquitetura da informação antes de tocar nos visuais tornou cada decisão de design mais rápida e mais barata. Fazer pairing com um engenheiro desde o primeiro dia significou que nada se perdeu entre design e construção.
+
+## O que eu faria diferente
+
+Rodar testes de usabilidade ao longo do processo em vez de só no final — alguns problemas apareceram mais tarde do que deveriam. Documentar as decisões com mais detalhes para quem mantiver isso depois de mim. Pushar a conversa sobre design-system mais cedo — ainda resta alguma inconsistência.

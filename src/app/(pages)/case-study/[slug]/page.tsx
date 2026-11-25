@@ -19,6 +19,7 @@ import ReadingProgressPill from '@/components/case-study/reading-progress-pill'
 
 // Data Imports
 import { getCaseStudyBySlug, getCaseStudies } from '@/lib/case-studies'
+import { getServerDictionary, getServerLocale } from '@/i18n/server'
 import { extractHeadings } from '@/lib/extract-headings'
 
 export async function generateStaticParams() {
@@ -37,9 +38,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   const { metadata } = caseStudy
+  const dictionary = await getServerDictionary()
 
   return {
-    title: `Case Study: ${metadata.title}`,
+    title: `${dictionary.caseStudy.titlePrefix}: ${metadata.title}`,
     description: metadata.description,
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_APP_URL}/case-study/${metadata.slug}`
@@ -60,6 +62,8 @@ const CaseStudyDetailsPage = async ({ params }: { params: Promise<{ slug: string
   }
 
   const { metadata, content } = caseStudy
+  const dictionary = await getServerDictionary()
+  const locale = await getServerLocale()
 
   const otherCaseStudies = caseStudies.filter(item => item.slug !== slug).slice(0, 2)
   const headings = extractHeadings(content)
@@ -67,9 +71,9 @@ const CaseStudyDetailsPage = async ({ params }: { params: Promise<{ slug: string
   const heroImageSrc = metadata.heroImage ?? metadata.image
 
   const metaItems = [
-    { label: 'Organisation', value: metadata.organisation, icon: UsersGroupIcon },
-    { label: 'Role', value: metadata.role, icon: UserCircleIcon },
-    { label: 'Duration', value: metadata.duration, icon: CalendarIcon }
+    { label: dictionary.caseStudy.meta.organisation, value: metadata.organisation, icon: UsersGroupIcon },
+    { label: dictionary.caseStudy.meta.role, value: metadata.role, icon: UserCircleIcon },
+    { label: dictionary.caseStudy.meta.duration, value: metadata.duration, icon: CalendarIcon }
   ].filter(item => item.value)
 
   const jsonLd = {
@@ -79,7 +83,7 @@ const CaseStudyDetailsPage = async ({ params }: { params: Promise<{ slug: string
         '@context': 'https://schema.org',
         '@type': 'WebPage',
         '@id': `${process.env.NEXT_PUBLIC_APP_URL}#webpage`,
-        name: `Case Study: ${metadata.title}`,
+        name: `${dictionary.caseStudy.titlePrefix}: ${metadata.title}`,
         description: metadata.description,
         url: `${process.env.NEXT_PUBLIC_APP_URL}/case-study/${metadata.slug}`
       },
@@ -120,7 +124,7 @@ const CaseStudyDetailsPage = async ({ params }: { params: Promise<{ slug: string
           >
             <ChevronLeftIcon className='size-4' />
           </Button>
-          Back to home
+          {dictionary.caseStudy.backToHome}
         </Link>
 
         <h1 className='text-card-foreground text-3xl leading-[1.2] font-semibold sm:text-4xl md:text-5xl lg:text-[64px]'>
@@ -155,7 +159,7 @@ const CaseStudyDetailsPage = async ({ params }: { params: Promise<{ slug: string
                   <RulerPenIcon className='text-accent size-8' />
                 </div>
                 <div>
-                  <p className='text-muted-foreground text-xs tracking-wide uppercase'>Tools & Technologies</p>
+                  <p className='text-muted-foreground text-xs tracking-wide uppercase'>{dictionary.caseStudy.tools}</p>
                   <div className='mt-1 flex flex-wrap gap-1.5'>
                     {metadata.tools.map(tool => (
                       <Badge
@@ -181,9 +185,9 @@ const CaseStudyDetailsPage = async ({ params }: { params: Promise<{ slug: string
       <FeaturedWorks
         caseStudies={otherCaseStudies}
         id='other-works'
-        eyebrow='Other works'
+        eyebrow={dictionary.nav.otherWorks}
         layout='vertical'
-        title='Have a look at my other work'
+        title={dictionary.nav.otherWorksTitle}
         showBorder={false}
       />
 

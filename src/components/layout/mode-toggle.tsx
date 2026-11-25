@@ -8,10 +8,14 @@ import { useTheme } from 'next-themes'
 import SunIcon from '@/assets/svg/sun'
 import MoonIcon from '@/assets/svg/moon'
 
+// Component Imports
+import { useLocale } from '@/components/locale-provider'
+
 import { cn } from '@/lib/utils'
 
 function ModeToggle({ className, children, ...props }: React.ComponentProps<'button'>) {
   const { resolvedTheme, setTheme } = useTheme()
+  const { dictionary } = useLocale()
 
   return (
     <button
@@ -25,7 +29,7 @@ function ModeToggle({ className, children, ...props }: React.ComponentProps<'but
         <SunIcon className='absolute size-4 scale-0 dark:scale-100' />
       </span>
       {children}
-      <span className='sr-only'>Toggle theme</span>
+      <span className='sr-only'>{dictionary.common.toggleTheme}</span>
     </button>
   )
 }

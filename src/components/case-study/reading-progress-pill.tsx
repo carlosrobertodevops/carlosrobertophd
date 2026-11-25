@@ -8,6 +8,7 @@ import { CheckIcon } from 'lucide-react'
 import { AnimatePresence, motion, useMotionValue, useSpring } from 'motion/react'
 
 // Component Imports
+import { useLocale } from '@/components/locale-provider'
 import { cn } from '@/lib/utils'
 
 type ReadingProgressPillProps = {
@@ -16,16 +17,16 @@ type ReadingProgressPillProps = {
 }
 
 const HEADER_OFFSET = 150
-const IDLE_LABEL = 'Points'
 const HOVER_OPEN_DELAY = 500
 const HOVER_CLOSE_DELAY = 200
 
 const cornerCurveBackground = 'radial-gradient(circle at 100% 100%, transparent 15.5px, var(--card) 16px)'
 
 const ReadingProgressPill = ({ headings, contentId }: ReadingProgressPillProps) => {
+  const { dictionary } = useLocale()
   const [percent, setPercent] = useState(0)
   const [activeSlug, setActiveSlug] = useState('')
-  const [activeLabel, setActiveLabel] = useState(IDLE_LABEL)
+  const [activeLabel, setActiveLabel] = useState(dictionary.caseStudy.points)
   const [isOpen, setIsOpen] = useState(false)
 
   const containerRef = useRef<HTMLDivElement>(null)
@@ -59,7 +60,7 @@ const ReadingProgressPill = ({ headings, contentId }: ReadingProgressPillProps) 
         .filter((el): el is HTMLElement => Boolean(el))
 
       let currentSlug = ''
-      let currentLabel = IDLE_LABEL
+      let currentLabel = dictionary.caseStudy.points
 
       for (let i = headingElements.length - 1; i >= 0; i--) {
         const heading = headingElements[i]
@@ -80,7 +81,7 @@ const ReadingProgressPill = ({ headings, contentId }: ReadingProgressPillProps) 
     window.addEventListener('scroll', handleScroll, { passive: true })
 
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [headings, rawProgress, contentId])
+  }, [headings, rawProgress, contentId, dictionary.caseStudy.points])
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

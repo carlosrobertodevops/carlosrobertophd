@@ -9,8 +9,8 @@ type ExperienceTimelineItemProps = {
   company: string
   role: string
   period: string
-  status?: { text: string; tone: 'positive' | 'accent' }
-  stack: string[]
+  status?: { readonly text: string; readonly tone: 'positive' | 'accent' }
+  stack: readonly string[]
   achievement: string
   description: string
 }
@@ -39,7 +39,7 @@ const ExperienceTimelineItem = ({
 
       <div className='mb-1.5 space-y-3 text-sm sm:text-base'>
         <p className='flex items-center gap-2'>
-          <img src='/images/experience/calendar.webp' alt='calendar' className='size-6' />
+          <img src='/images/experience/calendar.webp' alt='calendário' className='size-6' />
           <span className='text-base'>
             {period}
             {status && (
@@ -56,7 +56,7 @@ const ExperienceTimelineItem = ({
         </p>
 
         <div className='flex flex-wrap items-center gap-2'>
-          <img src='/images/experience/medal.webp' alt='Medal' className='size-6' />
+          <img src='/images/experience/medal.webp' alt='Medalha' className='size-6' />
           {stack.map(tech => (
             <Badge
               key={tech}
@@ -69,7 +69,7 @@ const ExperienceTimelineItem = ({
         </div>
 
         <p className='flex items-start gap-2 font-medium'>
-          <img src='/images/experience/speaker.webp' alt='speaker' className='size-6' />
+          <img src='/images/experience/speaker.webp' alt='orador' className='size-6' />
           <span className='text-base font-medium'>{achievement}</span>
         </p>
       </div>

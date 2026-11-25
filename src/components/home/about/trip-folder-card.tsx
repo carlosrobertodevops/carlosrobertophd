@@ -5,6 +5,7 @@ import { useState } from 'react'
 
 // Component Imports
 import { Card, CardContent } from '@/components/ui/card'
+import { useLocale } from '@/components/locale-provider'
 import { Badge } from '@/components/ui/badge'
 
 // Util Imports
@@ -34,6 +35,7 @@ const PHOTOS = [
 ]
 
 const TripFolderCard = () => {
+  const { dictionary } = useLocale()
   const [expanded, setExpanded] = useState(false)
 
   return (
@@ -73,12 +75,12 @@ const TripFolderCard = () => {
 
       <CardContent>
         <div className='flex items-center justify-center gap-3'>
-          <p className='text-foreground text-xl font-medium text-nowrap xl:text-[26px]'>Spain trip</p>
+          <p className='text-foreground text-xl font-medium text-nowrap xl:text-[26px]'>{dictionary.about.trip}</p>
           <Badge
             variant='secondary'
             className='text-muted dark:bg-background dark:text-primary/70 h-6.5 rounded-sm bg-white font-light'
           >
-            76 photos
+            {dictionary.about.tripPhotos.replace('{count}', '76')}
           </Badge>
         </div>
       </CardContent>

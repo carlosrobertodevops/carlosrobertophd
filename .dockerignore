@@ -1,0 +1,32 @@
+# Build apenas o necessário
+node_modules/
+.next/
+out/
+dist/
+build/
+*.local.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# pnpm store
+.pnpm-store/

@@ -9,6 +9,7 @@ import LinkedinIcon from '@/assets/svg/linkedin-icon'
 
 // Component Imports
 import { Badge } from '@/components/ui/badge'
+import { useLocale } from '@/components/locale-provider'
 import { Button } from '@/components/ui/button'
 import Eyebrow from '@/components/shared/eyebrow/eyebrow'
 import ContactForm from '@/components/contact/contact-form/contact-form'
@@ -20,6 +21,7 @@ const SOCIALS = [
 ]
 
 const ContactHero = () => {
+  const { dictionary } = useLocale()
   const mouseX = useMotionValue(0.5)
   const mouseY = useMotionValue(0.5)
   const springX = useSpring(mouseX, { stiffness: 150, damping: 20, mass: 0.5 })
@@ -44,12 +46,12 @@ const ContactHero = () => {
     <section className='border-b py-8 sm:py-16 lg:py-24'>
       <div className='mx-auto max-w-245 space-y-10 px-4 sm:px-6 lg:space-y-16 lg:px-10.5'>
         <div className='max-w-2xl space-y-2'>
-          <Eyebrow>Contact me</Eyebrow>
+          <Eyebrow>{dictionary.contact.eyebrow}</Eyebrow>
           <h1 className='text-2xl font-semibold sm:text-3xl lg:text-[36px]'>
-            <span className='max-md:hidden'>Feel free to send me a message,</span>{' '}
-            <span className='text-nowrap max-md:hidden'>I will get back to you as soon as possible.</span>
+            <span className='max-md:hidden'>{dictionary.contact.title}</span>{' '}
+            <span className='text-nowrap max-md:hidden'>{dictionary.contact.titleEnd}</span>
             <span className='md:hidden'>
-              Feel free to send me a message, I will get back to you as soon as possible.
+              {dictionary.contact.title} {dictionary.contact.titleEnd}
             </span>
           </h1>
         </div>
@@ -61,7 +63,7 @@ const ContactHero = () => {
             <div className='relative w-full overflow-hidden rounded-3xl'>
               <img
                 src='/images/services/service-bg.webp'
-                alt='Zolt Mercer'
+                alt='Carlos Roberto'
                 className='max-h-93.5 w-full object-cover'
               />
 
@@ -75,7 +77,7 @@ const ContactHero = () => {
               >
                 <img
                   src='/images/services/services-profile.webp'
-                  alt='Zolt Mercer'
+                  alt='Carlos Roberto'
                   className='max-w-105 object-cover'
                 />
               </motion.div>
@@ -89,16 +91,16 @@ const ContactHero = () => {
                     <span className='absolute -inset-0.5 animate-[ping_1.8s_cubic-bezier(0,0,0.2,1)_infinite] rounded-full bg-green-600/40 opacity-75 dark:bg-green-400/40' />
                     <span className='relative inline-flex size-1.5 rounded-full bg-green-600 dark:bg-green-400' />
                   </span>
-                  Available
+                  {dictionary.common.available}
                 </Badge>
               </div>
             </div>
 
             <div className='flex flex-col items-center justify-between gap-1.5 px-5 py-4'>
               <p className='flex items-center gap-2 font-medium'>
-                Zolt Mercer
+                Carlos Roberto
                 <span className='bg-muted-foreground inline-block size-2 rounded-full' />
-                <span className='text-muted-foreground font-normal'>Design engineer</span>
+                <span className='text-muted-foreground font-normal'>{dictionary.contact.role}</span>
               </p>
 
               <div className='flex items-center gap-1'>

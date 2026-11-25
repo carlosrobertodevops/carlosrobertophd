@@ -1,5 +1,6 @@
 // Component Imports
 import { Card, CardContent } from '@/components/ui/card'
+import { useLocale } from '@/components/locale-provider'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 
 // Util Imports
@@ -60,12 +61,14 @@ const BRAND_LOGOS = Array.from({ length: 20 }, (_, index) => {
 const LOGO_ROWS = [BRAND_LOGOS.slice(0, 10), BRAND_LOGOS.slice(10)]
 
 const ActivityCard = () => {
+  const { dictionary } = useLocale()
+
   return (
     <Card className='ring-border gap-6 rounded-3xl p-6 shadow-lg'>
       <CardContent className='space-y-4 p-0'>
         <div>
-          <p className='text-sm font-semibold'>@zolt_mercer</p>
-          <p className='text-muted-foreground text-xs opacity-75'>864 contributions in the template timeline</p>
+          <p className='text-sm font-semibold'>{dictionary.experience.handle}</p>
+          <p className='text-muted-foreground text-xs opacity-75'>{dictionary.experience.contributions}</p>
         </div>
 
         <div className='overflow-x-auto max-md:pr-6'>

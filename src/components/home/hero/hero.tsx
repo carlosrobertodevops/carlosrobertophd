@@ -11,8 +11,11 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import GreetingWord from '@/components/home/hero/greeting-word'
 import IdCard from '@/components/ui/id-card'
+import { useLocale } from '@/components/locale-provider'
 
 const Hero = () => {
+  const { dictionary } = useLocale()
+
   return (
     <section className='lg:relative'>
       <div className='border-b pb-8 max-sm:pt-20 sm:py-16 lg:pt-32 lg:pb-24'>
@@ -26,16 +29,13 @@ const Hero = () => {
                 <span className='absolute -inset-0.5 animate-[ping_1.8s_cubic-bezier(0,0,0.2,1)_infinite] rounded-full bg-green-600/40 opacity-75 dark:bg-green-400/40' />
                 <span className='relative inline-flex size-1.5 rounded-full bg-green-600 dark:bg-green-400' />
               </span>
-              Available
+              {dictionary.common.available}
             </Badge>
             <h1 className='mb-2 text-4xl font-semibold tracking-tight sm:text-5xl lg:text-[64px] lg:font-bold'>
-              <GreetingWord />I am Zolt 👋🏻
+              <GreetingWord />{dictionary.hero.intro.replace('{name}', 'Carlos Roberto')} 👋🏻
             </h1>
-            <p className='text-muted-foreground text-xl font-medium sm:text-2xl lg:text-3xl'>Design engineer</p>
-            <p className='mb-8 max-w-2xl text-base'>
-              Design engineer based in Austin. I don&apos;t just bridge design and engineering - I own the entire
-              experience, from the first sketch to the final shipped product.
-            </p>
+            <p className='text-muted-foreground text-xl font-medium sm:text-2xl lg:text-3xl'>{dictionary.hero.title}</p>
+            <p className='mb-8 max-w-2xl text-base'>{dictionary.hero.description}</p>
             <div className='flex items-center gap-2.5 pt-2'>
               <Button
                 variant='outline'
@@ -43,7 +43,7 @@ const Hero = () => {
                 render={<Link href='#' />}
                 nativeButton={false}
               >
-                Download CV
+                {dictionary.hero.downloadCv}
               </Button>
               <Button
                 variant='outline'
@@ -53,7 +53,7 @@ const Hero = () => {
                     <span className='bg-accent relative flex size-2.5 items-center justify-center overflow-hidden rounded-full transition-all duration-300 group-hover/button:size-6.5'>
                       <ArrowRightIcon className='text-accent-foreground absolute size-4.5 -translate-x-3 opacity-0 transition-all duration-300 group-hover/button:translate-x-0 group-hover/button:opacity-100' />
                     </span>
-                    Let&apos;s connect
+                    {dictionary.hero.contactCta}
                   </Link>
                 }
                 nativeButton={false}

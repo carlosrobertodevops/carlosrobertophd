@@ -1,7 +1,10 @@
+'use client'
+
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 
 // Component Imports
 import ProfileAvailabilityCard from '@/components/layout/profile-availability-card'
+import { useLocale } from '@/components/locale-provider'
 
 // Util Imports
 import { cn } from '@/lib/utils'
@@ -23,6 +26,8 @@ const NOT_FOUND_GRID = [EMPTY_ROW, ...DIGIT_ROWS, EMPTY_ROW].map(row => row.spli
 const cornerCurveBackground = 'radial-gradient(circle at 100% 100%, transparent 15.5px, var(--card) 16px)'
 
 const NotFound = () => {
+  const { dictionary } = useLocale()
+
   return (
     <div className='relative'>
       <div className='fixed inset-x-0 top-0 z-70 flex justify-center'>
@@ -43,8 +48,8 @@ const NotFound = () => {
       <div className='mx-auto flex h-screen w-full max-w-245 flex-col items-center justify-center gap-9 border-x p-6'>
         <Card className='w-full max-w-xl gap-6 rounded-3xl p-6 shadow-lg'>
           <CardHeader className='gap-1 p-0'>
-            <p className='text-base font-medium'>@Oooops</p>
-            <p className='text-muted-foreground text-sm font-light'>This page took a wrong turn somewhere</p>
+            <p className='text-base font-medium'>{dictionary.caseStudy.notFound}</p>
+            <p className='text-muted-foreground text-sm font-light'>{dictionary.caseStudy.notFoundMessage}</p>
           </CardHeader>
           <CardContent className='space-y-1 p-0'>
             {NOT_FOUND_GRID.map((row, rowIndex) => (

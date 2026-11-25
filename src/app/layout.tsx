@@ -5,12 +5,11 @@ import localFont from 'next/font/local'
 import type { Metadata } from 'next'
 
 import { ThemeProvider } from '@/components/theme-provider'
+import { LocaleProvider } from '@/components/locale-provider'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { Toaster } from '@/components/ui/sonner'
 import CustomCursor from '@/components/layout/custom-cursor'
 import EdgeBlur from '@/components/layout/edge-blur'
-
-import DownloadButton from '@/components/layout/Download'
 
 import { cn } from '@/lib/utils'
 
@@ -40,11 +39,11 @@ const satoshi = localFont({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s - Zolt',
-    default: 'Zolt - Portfolio Landing page'
+    template: '%s - Carlos Roberto',
+    default: 'Carlos Roberto - Portfolio Landing page'
   },
   description:
-    'Zolt is a Free modern Shadcn UI Portfolio Template built with Next.js for designers, developers, freelancers, and agencies to create fast, responsive, and SEO-friendly portfolio websites.',
+    'Carlos Roberto é um moderno portfólio de Landing Page construído com Next.js para designers, desenvolvedores, freelancers e agências criarem sites rápidos, responsivos e otimizados para SEO.',
   robots: 'index,follow',
   keywords: ['keyword1', 'keyword2', 'keyword3'],
   icons: {
@@ -90,13 +89,13 @@ export const metadata: Metadata = {
   metadataBase: new URL(`${process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'}`),
   openGraph: {
     title: {
-      template: '%s - Zolt',
-      default: 'Zolt - Portfolio Landing page'
+      template: '%s - Carlos Roberto',
+      default: 'Carlos Roberto - Portfolio Landing page'
     },
     description:
-      'Zolt is a Free modern Shadcn UI Portfolio Template built with Next.js for designers, developers, freelancers, and agencies to create fast, responsive, and SEO-friendly portfolio websites.',
+      'Carlos Roberto é um moderno portfólio de Landing Page construído com Next.js para designers, desenvolvedores, freelancers e agências criarem sites rápidos, responsivos e otimizados para SEO.',
     type: 'website',
-    siteName: 'Zolt',
+    siteName: 'Carlos Roberto',
     url: `${process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'}`,
     images: [
       {
@@ -111,11 +110,11 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: {
-      template: '%s - Zolt',
-      default: 'Zolt - Portfolio Landing page'
+      template: '%s - Carlos Roberto',
+      default: 'Carlos Roberto - Portfolio Landing page'
     },
     description:
-      'Zolt is a Free modern Shadcn UI Portfolio Template built with Next.js for designers, developers, freelancers, and agencies to create fast, responsive, and SEO-friendly portfolio websites.'
+      'Carlos Roberto é um moderno portfólio de Landing Page construído com Next.js para designers, desenvolvedores, freelancers e agências criarem sites rápidos, responsivos e otimizados para SEO.'
   }
 }
 
@@ -133,12 +132,12 @@ const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
     >
       <body className='flex min-h-full w-full flex-auto flex-col'>
         <ThemeProvider attribute='class' enableSystem={false} disableTransitionOnChange>
-          <TooltipProvider>{children}</TooltipProvider>
-          <EdgeBlur />
-          <Toaster />
-          <CustomCursor />
-
-          <DownloadButton />
+          <LocaleProvider>
+            <TooltipProvider>{children}</TooltipProvider>
+            <EdgeBlur />
+            <Toaster />
+            <CustomCursor />
+          </LocaleProvider>
         </ThemeProvider>
       </body>
     </html>

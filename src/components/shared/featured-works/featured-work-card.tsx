@@ -1,3 +1,5 @@
+'use client'
+
 // Next Imports
 import Link from 'next/link'
 
@@ -9,6 +11,7 @@ import type { CaseStudyMetadata } from '@/lib/case-studies'
 
 // Component Imports
 import { Badge } from '@/components/ui/badge'
+import { useLocale } from '@/components/locale-provider'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 
@@ -22,6 +25,7 @@ type FeaturedWorkCardProps = {
 }
 
 const FeaturedWorkCard = ({ caseStudy, variant = 'grid', imageSide = 'right' }: FeaturedWorkCardProps) => {
+  const { dictionary } = useLocale()
   const year = caseStudy.publishedAt ? new Date(caseStudy.publishedAt).getFullYear() : undefined
   const isHero = variant === 'hero'
 
@@ -75,7 +79,7 @@ const FeaturedWorkCard = ({ caseStudy, variant = 'grid', imageSide = 'right' }: 
                   <ArrowRightIcon className='absolute inset-0 size-4 -rotate-45 transition-transform duration-400 ease-in-out group-hover:translate-x-5 group-hover:-translate-y-5' />
                   <ArrowRightIcon className='absolute inset-0 size-4 -translate-x-5 translate-y-5 -rotate-45 transition-transform duration-400 ease-in-out group-hover:translate-x-0 group-hover:translate-y-0' />
                 </span>
-                <span className='sr-only'>Read case study: {caseStudy.title}</span>
+                <span className='sr-only'>{dictionary.common.readCaseStudy.replace('{title}', caseStudy.title ?? '')}</span>
               </Button>
             </div>
           </div>

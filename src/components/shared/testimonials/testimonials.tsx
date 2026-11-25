@@ -9,39 +9,10 @@ import { AnimatePresence, motion } from 'motion/react'
 
 // Component Imports
 import Eyebrow from '@/components/shared/eyebrow/eyebrow'
+import { useLocale } from '@/components/locale-provider'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
-type Testimonial = {
-  quote: string
-  name: string
-  role: string
-  avatar: string
-}
-
-const TESTIMONIALS: Testimonial[] = [
-  {
-    quote:
-      "Working with Zolt was a different experience. He didn't just deliver designs he delivered a working product.",
-    name: 'Marcus Reid',
-    role: 'Co-founder, Orion Labs',
-    avatar: '/images/testimonials/avatar-01.webp'
-  },
-  {
-    quote:
-      'Zolt built our entire design system in under a month. Every component was documented, every token was connected.',
-    name: 'Priya Nair',
-    role: 'Product Lead, Lumio SaaS',
-    avatar: '/images/testimonials/avatar-02.webp'
-  },
-  {
-    quote:
-      "I've hired a lot of freelancers. Zolt is the rare one who actually cares about the craft. He flagged things I hadn't even noticed.",
-    name: 'Daniel Hoffmann',
-    role: 'CTO, Trackflow HQ',
-    avatar: '/images/testimonials/avatar-03.webp'
-  }
-]
 
 const TILE_SIZE = 100
 const TILE_GAP = 8
@@ -83,26 +54,32 @@ type TestimonialsProps = {
 }
 
 const Testimonials = ({ showBorder = true }: TestimonialsProps) => {
+  const { dictionary } = useLocale()
   const [index, setIndex] = useState(0)
   const [previousIndex, setPreviousIndex] = useState(0)
   const [direction, setDirection] = useState(1)
 
+  const testimonials = dictionary.testimonials.items.map((item, i) => ({
+    ...item,
+    avatar: `/images/testimonials/avatar-${String(i + 1).padStart(2, '0')}.webp`
+  }))
+
   const goTo = (nextDirection: number) => {
     setPreviousIndex(index)
-    setIndex(current => (current + nextDirection + TESTIMONIALS.length) % TESTIMONIALS.length)
+    setIndex(current => (current + nextDirection + testimonials.length) % testimonials.length)
     setDirection(nextDirection)
   }
 
-  const testimonial = TESTIMONIALS[index]
-  const outgoing = TESTIMONIALS[previousIndex]
+  const testimonial = testimonials[index]
+  const outgoing = testimonials[previousIndex]
 
   return (
     <section id='testimonials' className={cn('py-8 sm:py-16 lg:py-24', showBorder && 'border-b')}>
       <div className='mx-auto max-w-7xl space-y-8 px-4 sm:px-6 lg:space-y-16 lg:px-10.5'>
         <div className='space-y-2'>
-          <Eyebrow>Good words</Eyebrow>
+          <Eyebrow>{dictionary.testimonials.eyebrow}</Eyebrow>
           <h2 className='text-2xl font-semibold md:text-3xl lg:text-4xl'>
-            some good words from people I&apos;ve worked with
+            {dictionary.testimonials.title}
           </h2>
         </div>
 

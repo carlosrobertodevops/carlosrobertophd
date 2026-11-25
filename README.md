@@ -6,17 +6,17 @@
 
 <h1 align="center">
    <a href="https://shadcnstudio.com/templates/zolt-portfolio-template-free" target="_blank" align="center">
-      Zolt - Shadcn UI Portfolio Landing Page Template - Free
+      Carlos Roberto - Shadcn UI Portfolio Landing Page Template - Free
    </a>
 </h1>
 
 ![GitHub](https://img.shields.io/github/license/shadcnstudio/shadcn-nextjs-zolt-landing-page-free) ![GitHub issues](https://img.shields.io/github/issues/shadcnstudio/shadcn-nextjs-zolt-landing-page-free) ![GitHub closed issues](https://img.shields.io/github/issues-closed/shadcnstudio/shadcn-nextjs-zolt-landing-page-free) ![Twitter Follow](https://img.shields.io/twitter/follow/ShadcnStudio?style=social)
 
-<kbd>[![Zolt - Shadcn UI Portfolio Landing Page Template Demo Screenshot](https://cdn.shadcnstudio.com/ss-assets/template/landing-page/zolt/og-image.png)](https://shadcnstudio.com/templates/zolt-portfolio-template-free)</kbd>
+<kbd>[![Carlos Roberto - Shadcn UI Portfolio Landing Page Template Demo Screenshot](https://cdn.shadcnstudio.com/ss-assets/template/landing-page/zolt/og-image.png)](https://shadcnstudio.com/templates/zolt-portfolio-template-free)</kbd>
 
 ## Introduction 🚀
 
-Zolt is a Free modern Shadcn UI Portfolio Template built with Next.js for designers, developers, freelancers, and agencies to create fast, responsive, and SEO-friendly portfolio websites.
+Carlos Roberto é um portfólio moderno de Landing Page construído com Next.js para designers, desenvolvedores, freelancers e agências criarem sites rápidos, responsivos e otimizados para SEO.
 
 [View Demo](https://shadcnstudio.com/preview/templates/shadcn-nextjs-zolt-landing-page)
 
@@ -100,7 +100,7 @@ Following the philosophy of Shadcn, shadcn/studio isn&apos;t a conventional &quo
 
 ## Why should I use shadcn/studio? 💡
 
-shadcn/ui aims to provide core components with a unique distribution system, allowing developers to copy and paste reusable, customizable UI elements directly into their codebase.
+shadcn/ui aims to provide core components with a unique distribution system, allowing developers to copy and paste reusable, customizable UI elements directly into your codebase.
 
 While this approach offers flexibility and control, it comes with some limitations: a lack of diverse component variants examples, limited theme customization options, and limited pre-built blocks. Additionally, its extensive customization options, though powerful, can sometimes feel overwhelming, especially for those seeking a more guided or streamlined experience.
 

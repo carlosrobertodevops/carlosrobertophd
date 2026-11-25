@@ -9,49 +9,18 @@ import { motion, useMotionValue, useSpring, useTransform } from 'motion/react'
 
 // Component Imports
 import Eyebrow from '@/components/shared/eyebrow/eyebrow'
+import { useLocale } from '@/components/locale-provider'
 import { Accordion, AccordionItem, AccordionPanel, AccordionTrigger } from '@/components/ui/accordion'
 
-const SERVICES = [
-  {
-    title: 'UI & Product Design',
-    image: '/images/services/thumb-01.webp',
-    duration: '1 to 3 weeks',
-    tools: ['Figma', 'Spline', 'Adobe XD'],
-    description:
-      'I design interfaces that are clean, intuitive, and built around your users. From the wireframe to the final pixel-perfect file.'
-  },
-  {
-    title: 'Design Engineering',
-    image: '/images/services/thumb-02.webp',
-    duration: '2 to 4 weeks',
-    tools: ['React', 'Tailwind', 'Figma'],
-    description: 'I bridge the gap between design and code, turning polished mockups into production-ready interfaces.'
-  },
-  {
-    title: 'Framer Development',
-    image: '/images/services/thumb-03.webp',
-    duration: '1 to 2 weeks',
-    tools: ['Framer', 'CMS', 'SEO'],
-    description: 'I build and launch fast, animated marketing sites in Framer — from first draft to live domain.'
-  },
-  {
-    title: 'Design Systems',
-    image: '/images/services/thumb-04.webp',
-    duration: '3 to 6 weeks',
-    tools: ['Figma', 'Tokens', 'Component library'],
-    description: 'I build scalable design systems that keep design and code in sync as your product grows.'
-  },
-  {
-    title: 'Interaction & Motion Design',
-    image: '/images/services/thumb-05.webp',
-    duration: '1 to 3 weeks',
-    tools: ['Framer', 'GSAP', 'Motion'],
-    description: 'I add the small, purposeful motion details that make an interface feel alive and considered.'
-  }
-]
 
 const Services = () => {
+  const { dictionary } = useLocale()
   const containerRef = useRef<HTMLDivElement>(null)
+
+  const services = dictionary.services.items.map((item, index) => ({
+    ...item,
+    image: `/images/services/thumb-${String(index + 1).padStart(2, '0')}.webp`
+  }))
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [displayedIndex, setDisplayedIndex] = useState<number | null>(null)
 
@@ -104,8 +73,8 @@ const Services = () => {
     <section id='services' className='border-b py-8 sm:py-16 lg:py-24'>
       <div className='mx-auto max-w-7xl space-y-8 px-4 sm:px-6 lg:space-y-16 lg:px-10.5'>
         <div className='space-y-2'>
-          <Eyebrow>Services I provide</Eyebrow>
-          <h2 className='text-2xl font-semibold md:text-3xl lg:text-4xl'>I can help you with these things</h2>
+          <Eyebrow>{dictionary.services.eyebrow}</Eyebrow>
+          <h2 className='text-2xl font-semibold md:text-3xl lg:text-4xl'>{dictionary.services.title}</h2>
         </div>
 
         <div
@@ -116,7 +85,7 @@ const Services = () => {
           onMouseLeave={handleContainerMouseLeave}
         >
           <Accordion className='divide-y'>
-            {SERVICES.map((service, index) => (
+            {services.map((service, index) => (
               <AccordionItem key={service.title} value={index} onMouseEnter={() => handleServiceMouseEnter(index)}>
                 <AccordionTrigger className='text-primary text-lg sm:text-xl lg:text-[26px]'>
                   <span>
@@ -151,8 +120,8 @@ const Services = () => {
           >
             {displayedIndex !== null && (
               <img
-                src={SERVICES[displayedIndex].image}
-                alt='Accordion Thumb'
+                src={services[displayedIndex].image}
+                alt='Miniatura do acordeão'
                 className='h-auto w-full rounded-lg object-cover'
               />
             )}

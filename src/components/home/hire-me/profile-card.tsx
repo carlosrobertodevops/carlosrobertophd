@@ -9,18 +9,22 @@ import { MapPinIcon } from 'lucide-react'
 
 // Component Imports
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { useLocale } from '@/components/locale-provider'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 
-const STATS = [
-  { label: 'Total hours', value: '163' },
-  { label: 'Rating', value: '4.82' },
-  { label: 'Total jobs', value: '81' }
-]
+const STAT_VALUES = ['163', '4.82', '81']
 
 const ProfileCard = ({ className }: { className?: string }) => {
+  const { dictionary } = useLocale()
   const containerRef = useRef<HTMLDivElement>(null)
+
+  const stats = [
+    { label: dictionary.hireMe.stats.totalHours, value: STAT_VALUES[0] },
+    { label: dictionary.hireMe.stats.rating, value: STAT_VALUES[1] },
+    { label: dictionary.hireMe.stats.totalJobs, value: STAT_VALUES[2] }
+  ]
   const [isFlipped, setIsFlipped] = useState(false)
 
   const { scrollYProgress } = useScroll({
@@ -62,24 +66,24 @@ const ProfileCard = ({ className }: { className?: string }) => {
                 <div className='flex grow flex-col items-center gap-4'>
                   <div className='relative'>
                     <Avatar className='size-30'>
-                      <AvatarImage src='/images/hire-me/profile.webp' alt='Zolt Mercer' />
-                      <AvatarFallback>Z</AvatarFallback>
+                      <AvatarImage src='/images/hire-me/profile.webp' alt='Carlos Roberto' />
+                      <AvatarFallback>CR</AvatarFallback>
                     </Avatar>
                     <span className='absolute -bottom-3 left-[50%] flex size-7.5 -translate-x-1/2 items-center justify-center'>
                       <img src='/images/hire-me/profile-star-icon.webp' alt='Verified' />
                     </span>
                   </div>
                   <div>
-                    <h3 className='text-xl font-semibold lg:text-[36px]'>Zolt Mercer</h3>
+                    <h3 className='text-xl font-semibold lg:text-[36px]'>Carlos Roberto</h3>
                     <p className='text-muted-foreground flex items-center justify-center gap-1 text-base font-medium'>
                       <MapPinIcon className='fill-muted-foreground text-card size-5' />
-                      Austin, USA
+                      {dictionary.hireMe.location}
                     </p>
                   </div>
                 </div>
 
                 <div className='divide-border divide-y text-center'>
-                  {STATS.map(stat => (
+                  {stats.map(stat => (
                     <div key={stat.label} className='py-1.5 first:pt-0 last:pb-0'>
                       <p className='text-foreground text-xl font-semibold lg:text-[26px]'>{stat.value}</p>
                       <p className='text-base'>{stat.label}</p>
@@ -96,16 +100,14 @@ const ProfileCard = ({ className }: { className?: string }) => {
           >
             <CardContent className='relative flex h-full flex-col justify-between gap-6'>
               <div>
-                <p className='text-xs text-white/60'>Zolt Mercer</p>
-                <h3 className='text-base font-medium'>Verified since April 2019</h3>
+                <p className='text-xs text-white/60'>Carlos Roberto</p>
+                <h3 className='text-base font-medium'>{dictionary.hireMe.verifiedSince}</h3>
               </div>
 
               <div className='flex items-end justify-between gap-3'>
-                <p className='text-base'>
-                  I care about craft, details, and building things people actually enjoy using.
-                </p>
+                <p className='text-base'>{dictionary.hireMe.backCard}</p>
                 <Avatar className='h-24.5 w-20.5 shrink-0 rounded-[12px]'>
-                  <AvatarImage src='/images/hire-me/profile.webp' alt='Zolt Mercer' className='rounded-[12px]' />
+                  <AvatarImage src='/images/hire-me/profile.webp' alt='Carlos Roberto' className='rounded-[12px]' />
                   <AvatarFallback>Z</AvatarFallback>
                 </Avatar>
               </div>
@@ -123,13 +125,13 @@ const ProfileCard = ({ className }: { className?: string }) => {
             <span className='absolute -inset-0.5 animate-[ping_1.8s_cubic-bezier(0,0,0.2,1)_infinite] rounded-full bg-green-600/40 opacity-75 dark:bg-green-400/40' />
             <span className='relative inline-flex size-1.5 rounded-full bg-green-600 dark:bg-green-400' />
           </span>
-          Available
+          {dictionary.common.available}
         </Badge>
 
-        <p className='mb-2 text-xl font-medium sm:text-2xl lg:text-[30px]'>Hire me today</p>
+        <p className='mb-2 text-xl font-medium sm:text-2xl lg:text-[30px]'>{dictionary.hireMe.hireTitle}</p>
 
         <p className='text-muted-foreground text-base'>
-          I take on only a small number of projects at a time, so your work always gets my full focus.
+          {dictionary.hireMe.hireDescription}
         </p>
       </div>
     </div>

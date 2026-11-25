@@ -5,10 +5,12 @@ import { useState } from 'react'
 
 // Third-party Imports
 import { format } from 'date-fns'
+import { enUS, es, ptBR } from 'date-fns/locale'
 import { ArrowLeftIcon, CheckIcon, ChevronRightIcon } from 'lucide-react'
 
 // Component Imports
 import { Button } from '@/components/ui/button'
+import { useLocale } from '@/components/locale-provider'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { cn } from '@/lib/utils'
 import ChooseTimeStep from './choose-time-step'
@@ -16,50 +18,28 @@ import DetailsStep from './details-step'
 
 const TOTAL_STEPS = 3
 
-const STEP_TITLES: Record<number, string> = {
-  1: 'Select Service',
-  2: 'Choose Time',
-  3: 'Your Details'
-}
 
-const SERVICES = [
-  {
-    id: 'product-design-engineering',
-    title: 'Product Design & Engineering',
-    price: '$240',
-    duration: '20 min',
-    description: 'End-to-end ownership from design to code'
-  },
-  {
-    id: 'framer-site-or-landing-page',
-    title: 'Framer Site or Landing Page',
-    price: '$120',
-    duration: '30 min',
-    description: 'Designed and built in Framer, live ready to launch'
-  },
-  {
-    id: 'design-system-setup',
-    title: 'Design System Setup',
-    price: '$160',
-    duration: '15 min',
-    description: 'I create design system that can scale'
-  }
-]
 
 const ServiceStepCard = () => {
+  const { dictionary, locale } = useLocale()
   const [step, setStep] = useState(1)
-  const [selectedServiceId, setSelectedServiceId] = useState<string | null>(null)
+
+  const services = dictionary.selectService.services
+
+  const dateLocale = locale === 'en-US' ? enUS : locale === 'es-ES' ? es : ptBR
+  const datePattern = locale === 'en-US' ? 'EEE, MMM d' : 'EEEE, d MMM'
+  const [selectedServiceIndex, setSelectedServiceIndex] = useState<number | null>(null)
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined)
   const [selectedTime, setSelectedTime] = useState<string | null>(null)
   const [bookingName, setBookingName] = useState<string | null>(null)
 
-  const selectedService = SERVICES.find(service => service.id === selectedServiceId)
+  const selectedService = services.find((service, index) => index === selectedServiceIndex)
 
-  const canAdvance = step === 1 ? Boolean(selectedServiceId) : step === 2 ? Boolean(selectedDate && selectedTime) : true
+  const canAdvance = step === 1 ? selectedServiceIndex !== null : step === 2 ? Boolean(selectedDate && selectedTime) : true
 
   const handleReset = () => {
     setStep(1)
-    setSelectedServiceId(null)
+    setSelectedServiceIndex(null)
     setSelectedDate(undefined)
     setSelectedTime(null)
     setBookingName(null)
@@ -73,11 +53,13 @@ const ServiceStepCard = () => {
         </span>
 
         <div className='mb-8 space-y-3'>
-          <h3 className='text-[24px] font-medium'>Booking Confirmed</h3>
+          <h3 className='text-[24px] font-medium'>{dictionary.selectService.details.confirmTitle}</h3>
           <p className='text-foreground text-[15px]'>
-            Thank you, {bookingName}. Your {selectedService?.title} is scheduled for{' '}
-            {selectedDate && format(selectedDate, 'EEE, MMM d')} at {selectedTime}. We&apos;ve sent a confirmation to
-            your email.
+            {dictionary.selectService.details.confirmBody
+              .replace('{name}', bookingName)
+              .replace('{service}', selectedService?.title ?? '')
+              .replace('{date}', selectedDate ? format(selectedDate, datePattern, { locale: dateLocale }) : '')
+              .replace('{time}', selectedTime ?? '')}
           </p>
         </div>
 
@@ -86,7 +68,7 @@ const ServiceStepCard = () => {
           className='bg-card hover:bg-background h-12.75 w-39.75 rounded-[24px] text-[15px] font-medium'
           onClick={handleReset}
         >
-          Book Another
+          {dictionary.selectService.details.bookAnother}
         </Button>
       </div>
     )
@@ -97,9 +79,11 @@ const ServiceStepCard = () => {
       <div className='from-accent relative bg-linear-to-br to-red-600 px-6 pt-6 pb-12'>
         <div className='relative z-10 flex items-start justify-between'>
           <div>
-            <p className='text-primary-foreground dark:text-primary text-xl font-semibold'>{STEP_TITLES[step]}</p>
+            <p className='text-primary-foreground dark:text-primary text-xl font-semibold'>
+              {dictionary.selectService.steps[step - 1]}
+            </p>
             <p className='text-primary-foreground dark:text-primary text-sm'>
-              Step {step} of {TOTAL_STEPS}
+              {dictionary.selectService.stepOf.replace('{current}', String(step)).replace('{total}', String(TOTAL_STEPS))}
             </p>
           </div>
 
@@ -125,20 +109,20 @@ const ServiceStepCard = () => {
           className={cn('hover:bg-card -ml-2.5 gap-1.5 px-2.5', step === 1 && 'invisible')}
         >
           <ArrowLeftIcon className='size-4' />
-          Back
+          {dictionary.selectService.back}
         </Button>
 
         <ScrollArea className='h-83'>
           {step === 1 && (
             <div className='space-y-3'>
-              {SERVICES.map(service => {
-                const selected = selectedServiceId === service.id
+              {services.map((service, serviceIndex) => {
+                const selected = selectedServiceIndex === serviceIndex
 
                 return (
                   <Button
-                    key={service.id}
+                    key={serviceIndex}
                     variant='outline'
-                    onClick={() => setSelectedServiceId(service.id)}
+                    onClick={() => setSelectedServiceIndex(serviceIndex)}
                     className={cn(
                       'bg-card hover:bg-card h-auto w-full items-start justify-start gap-3 rounded-xl p-4 text-left whitespace-normal',
                       selected
@@ -188,7 +172,7 @@ const ServiceStepCard = () => {
               <Button
                 variant='secondary'
                 size='icon'
-                aria-label='Next step'
+                aria-label={dictionary.selectService.nextStep}
                 disabled={!canAdvance}
                 onClick={() => setStep(current => Math.min(TOTAL_STEPS, current + 1))}
                 className={cn(
@@ -206,9 +190,9 @@ const ServiceStepCard = () => {
                 form='details-form'
                 className='bg-accent hover:bg-accent h-14 w-full rounded-3xl text-base font-medium text-white'
               >
-                Book Appointment
+                {dictionary.selectService.details.submit}
               </Button>
-              <p className='text-muted-foreground text-center text-xs'>Your information is secure and private.</p>
+              <p className='text-muted-foreground text-center text-xs'>{dictionary.selectService.details.secureNote}</p>
             </>
           )}
         </div>

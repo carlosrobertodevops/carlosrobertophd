@@ -9,6 +9,7 @@ import LinkedinIcon from '@/assets/svg/linkedin-icon'
 
 // Component Imports
 import { Badge } from '@/components/ui/badge'
+import { useLocale } from '@/components/locale-provider'
 import { Button } from '@/components/ui/button'
 
 const SOCIALS = [
@@ -18,6 +19,7 @@ const SOCIALS = [
 ]
 
 const ProfilePanel = () => {
+  const { dictionary } = useLocale()
   const mouseX = useMotionValue(0.5)
   const mouseY = useMotionValue(0.5)
   const springX = useSpring(mouseX, { stiffness: 150, damping: 20, mass: 0.5 })
@@ -41,7 +43,7 @@ const ProfilePanel = () => {
   return (
     <div className='flex h-full flex-col justify-end overflow-hidden'>
       <div className='relative h-full w-full overflow-hidden rounded-3xl'>
-        <img src='/images/services/service-bg.webp' alt='Zolt Mercer' className='h-full object-cover' />
+        <img src='/images/services/service-bg.webp' alt='Carlos Roberto' className='h-full object-cover' />
 
         <motion.div
           className='absolute bottom-0 max-lg:left-1/2 max-lg:-translate-x-1/2'
@@ -51,7 +53,7 @@ const ProfilePanel = () => {
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
         >
-          <img src='/images/services/services-profile.webp' alt='Zolt Mercer' className='max-w-120 object-cover' />
+          <img src='/images/services/services-profile.webp' alt='Carlos Roberto' className='max-w-120 object-cover' />
         </motion.div>
 
         <div className='absolute inset-x-0 bottom-0 flex justify-center'>
@@ -63,16 +65,17 @@ const ProfilePanel = () => {
               <span className='absolute -inset-0.5 animate-[ping_1.8s_cubic-bezier(0,0,0.2,1)_infinite] rounded-full bg-green-600/40 opacity-75 dark:bg-green-400/40' />
               <span className='relative inline-flex size-1.5 rounded-full bg-green-600 dark:bg-green-400' />
             </span>
-            Available
+            {dictionary.common.available}
           </Badge>
         </div>
       </div>
 
       <div className='flex flex-col items-center justify-between gap-1.5 px-5 py-4'>
         <p className='flex items-center gap-2 font-medium'>
-          Zolt Mercer
+          Carlos Roberto
           <span className='bg-muted-foreground inline-block size-2 rounded-full' />
-          <span className='text-muted-foreground font-normal'>Design engineer</span>
+          <span className='text-muted-foreground font-normal'>{dictionary.contact.role}</span>
+          <span className='text-muted-foreground font-normal'>{dictionary.contact.role}</span>
         </p>
 
         <div className='flex items-center gap-1'>

@@ -7,10 +7,11 @@ import { toast } from 'sonner'
 
 // Type Imports
 import type { ContactFormValues } from './contact-form-schema'
-import { contactFormSchema, SERVICE_OPTIONS } from './contact-form-schema'
+import { getContactFormSchema, SERVICE_OPTIONS } from './contact-form-schema'
 
 // Component Imports
 import { Button } from '@/components/ui/button'
+import { useLocale } from '@/components/locale-provider'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
@@ -24,8 +25,10 @@ type ContactFormProps = {
 }
 
 const ContactForm = ({ className }: ContactFormProps) => {
+  const { dictionary, locale } = useLocale()
+
   const form = useForm<ContactFormValues>({
-    resolver: zodResolver(contactFormSchema),
+    resolver: zodResolver(getContactFormSchema(locale)),
     defaultValues: {
       name: '',
       email: '',
@@ -36,7 +39,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
 
   const onSubmit = (values: ContactFormValues) => {
     console.log(values)
-    toast.success("Message sent — I'll get back to you as soon as possible.")
+    toast.success(dictionary.contact.success)
     form.reset()
   }
 
@@ -48,10 +51,10 @@ const ContactForm = ({ className }: ContactFormProps) => {
           name='name'
           render={({ field }) => (
             <FormItem className='gap-1'>
-              <FormLabel className='text-muted-foreground text-base'>Name*</FormLabel>
+              <FormLabel className='text-muted-foreground text-base'>{dictionary.contact.name}</FormLabel>
               <FormControl>
                 <Input
-                  placeholder='John doe'
+                  placeholder={dictionary.contact.namePlaceholder}
                   className='border-border h-11 rounded-[12px] bg-(--background-darker)'
                   {...field}
                 />
@@ -66,11 +69,11 @@ const ContactForm = ({ className }: ContactFormProps) => {
           name='email'
           render={({ field }) => (
             <FormItem className='gap-1'>
-              <FormLabel className='text-muted-foreground text-base'>Email*</FormLabel>
+              <FormLabel className='text-muted-foreground text-base'>{dictionary.contact.email}</FormLabel>
               <FormControl>
                 <Input
                   type='email'
-                  placeholder='john@framer.com'
+                  placeholder={dictionary.contact.emailPlaceholder}
                   className='border-border h-11 rounded-[12px] bg-(--background-darker)'
                   {...field}
                 />
@@ -85,11 +88,11 @@ const ContactForm = ({ className }: ContactFormProps) => {
           name='service'
           render={({ field }) => (
             <FormItem className='gap-1'>
-              <FormLabel className='text-muted-foreground text-base'>Service*</FormLabel>
+              <FormLabel className='text-muted-foreground text-base'>{dictionary.contact.service}</FormLabel>
               <Select value={field.value || undefined} onValueChange={field.onChange}>
                 <FormControl>
                   <SelectTrigger className='border-border h-11! w-full rounded-[12px] bg-(--background-darker)'>
-                    <SelectValue placeholder='Select a service' />
+                    <SelectValue placeholder={dictionary.contact.selectService} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -112,10 +115,10 @@ const ContactForm = ({ className }: ContactFormProps) => {
           name='message'
           render={({ field }) => (
             <FormItem className='gap-1'>
-              <FormLabel className='text-muted-foreground text-base'>Message</FormLabel>
+              <FormLabel className='text-muted-foreground text-base'>{dictionary.contact.message}</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder='Enter your message'
+                  placeholder={dictionary.contact.messagePlaceholder}
                   className='border-border min-h-25 rounded-[12px] bg-(--background-darker)'
                   {...field}
                 />
@@ -130,7 +133,7 @@ const ContactForm = ({ className }: ContactFormProps) => {
           variant='outline'
           className='hover:bg-card hover:text-accent rounded-[12px bg-card h-10 w-full'
         >
-          Submit
+          {dictionary.contact.submit}
         </Button>
       </form>
     </Form>

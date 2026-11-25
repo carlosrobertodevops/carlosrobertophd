@@ -1,8 +1,11 @@
+'use client'
+
 // Next Imports
 import Image from 'next/image'
 
 // Component Imports
 import { Button } from '@/components/ui/button'
+import { useLocale } from '@/components/locale-provider'
 import { Separator } from '@/components/ui/separator'
 
 const socials = [
@@ -13,6 +16,8 @@ const socials = [
 ]
 
 const Footer = () => {
+  const { dictionary } = useLocale()
+
   return (
     <footer className='lg:px-10.5'>
       <div className='mx-auto max-w-4xl space-y-12 pb-12 lg:border-x xl:max-w-245'>
@@ -35,14 +40,14 @@ const Footer = () => {
         </div>
 
         <div className='mb-8 flex items-center justify-center gap-5 text-center max-lg:hidden xl:ml-8'>
-          <p className='text-muted-foreground'>Thank you, for visiting here</p>
-          <img src='/images/footer/tree-seal.webp' alt='Seal' className='size-25' />
-          <p className='text-muted-foreground'>Let&apos;s create something beautiful</p>
+          <p className='text-muted-foreground'>{dictionary.footer.thankYou}</p>
+          <img src='/images/footer/tree-seal.webp' alt={dictionary.footer.seal} className='size-25' />
+          <p className='text-muted-foreground'>{dictionary.footer.create}</p>
         </div>
 
         <div className='-ml-5 space-y-1 text-center'>
-          <img src='/images/footer/signature.webp' alt='Seal' className='mx-auto -mb-6 w-60' />
-          <p className='text-xs'>@zolt Mercer {new Date().getFullYear()}</p>
+          <img src='/images/footer/signature.webp' alt={dictionary.footer.seal} className='mx-auto -mb-6 w-60' />
+          <p className='text-xs'>@carlosroberto_devops {new Date().getFullYear()}</p>
         </div>
       </div>
     </footer>

@@ -1,12 +1,12 @@
 {
-  "name": "Zolt - Portfolio Landing page",
-  "short_name": "Zolt",
-  "description": "Build lightning-fast, SEO-optimized websites with Astro, shadcn/ui, and Tailwind CSS",
+  "name": "Carlos Roberto - Portfolio Landing page",
+  "short_name": "Carlos Roberto",
+  "description": "Portfólio moderno de Landing Page construído com Next.js para designers, desenvolvedores e agências.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "background_color": "#0a0a0a",
+  "theme_color": "#FF9900",
   "orientation": "portrait-primary",
   "categories": [
     "productivity",

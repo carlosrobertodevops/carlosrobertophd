@@ -1,18 +1,25 @@
 import { z } from 'zod'
 
+import { getDictionary } from '@/i18n/dictionary'
+import type { Locale } from '@/i18n/locales'
+
 export const SERVICE_OPTIONS = [
-  'UI & Product Design',
-  'Design Engineering',
-  'Framer Development',
-  'Design Systems',
-  'Interaction & Motion Design'
+  'UI &amp; Design de Produto',
+  'Engenharia de Design',
+  'Desenvolvimento Framer',
+  'Sistemas de Design',
+  'Interação &amp; Motion Design'
 ] as const
 
-export const contactFormSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters.'),
-  email: z.string().email('Enter a valid email address.'),
-  service: z.string().min(1, 'Please select a service.'),
-  message: z.string().min(10, 'Message must be at least 10 characters.')
-})
+export const getContactFormSchema = (locale: Locale) => {
+  const { contact } = getDictionary(locale)
 
-export type ContactFormValues = z.infer<typeof contactFormSchema>
+  return z.object({
+    name: z.string().min(2, contact.nameError),
+    email: z.string().email(contact.emailError),
+    service: z.string().min(1, contact.serviceError),
+    message: z.string().min(10, contact.messageError)
+  })
+}
+
+export type ContactFormValues = z.infer<ReturnType<typeof getContactFormSchema>>

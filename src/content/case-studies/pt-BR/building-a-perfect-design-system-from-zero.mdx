@@ -1,0 +1,84 @@
+---
+slug: 'building-a-perfect-design-system-from-zero'
+title: 'Construindo um Design System Perfeito do Zero'
+description: 'Entrei no time quando cada tela era construída de forma totalmente isolada, sem tokens, sem componentes e sem consistência.'
+organisation: 'Lumio'
+role: 'Designer'
+duration: '4 meses'
+tools: ['Figma', 'React', 'Tailwind CSS']
+publishedAt: '2026-04-01'
+image: '/images/features/page-01.webp'
+heroImage: '/images/case-study/lumio-04.webp'
+logo: '/images/features/logo-01.webp'
+---
+
+## O Problema
+
+Entrei no time quando cada tela era construída em isolamento — sem tokens, sem componentes, sem linguagem compartilhada entre design e engenharia. Quatro times entregando UI que pareciam quatro produtos diferentes.
+
+<div className='my-24 grid gap-4 sm:grid-cols-2'>
+  <div className='bg-card relative w-full overflow-hidden rounded-3xl p-2 dark:bg-white/10'>
+    <img
+      src='/images/case-study/lumio-02.webp'
+      alt='Auditoria de botões, inputs e cards inconsistentes em todo o produto'
+      className='w-full rounded-3xl'
+    />
+  </div>
+  <div className='bg-card relative w-full overflow-hidden rounded-3xl p-2 dark:bg-white/10'>
+    <img
+      src='/images/case-study/lumio-03.webp'
+      alt='Captura de tela anotada apontando uso inconsistente de raio, borda e cor'
+      className='w-full rounded-3xl'
+    />
+  </div>
+</div>
+
+## Meu papel
+
+Fui dono de todo o pipeline design-to-code. Auditei cada tela existente, defini o sistema de tokens, construí a biblioteca de componentes em Figma e React, e consegui que os quatro times a usassem dentro de um mês.
+
+## Resultado
+
+- Design system adotado por 4 times de produto em 30 dias do lançamento
+
+## Como resolvi
+
+A primeira coisa que fiz foi **nada**.
+
+Sem Figma, sem componentes — apenas duas semanas de auditoria pura. Passei por cada tela do produto e cataloguei cada botão, cada decisão de espaçamento, cada cor hardcoded de forma diferente por um engenheiro em um dia diferente.
+
+> No fim eu tinha uma planilha com 340 inconsistências em 30 telas. Esse documento virou o briefing.
+
+Então construí o **sistema de tokens** antes de tocar em um único componente. Cada cor, valor de espaçamento, raio de borda e decisão tipográfica foi definido como uma **variável do Figma** e espelhado como uma **custom property CSS** no código. A regra era simples —
+
+> Se não é um token, não existe.
+
+Essa única restrição eliminou uma categoria inteira de inconsistências futuras. Os componentes vieram por último. Cada um foi construído **simultaneamente no Figma e no React** — então nunca houve um momento em que o arquivo de design e o código divergissem. Todo componente foi entregue com estados default, hover, focused e disabled. Toda decisão tinha uma razão escrita no Notion.
+
+O objetivo não era apenas construir um sistema — **era construir um que o time pudesse manter sem mim**.
+
+<div className='bg-card relative mt-24 w-full overflow-hidden rounded-3xl p-2 sm:p-3 dark:bg-white/10'>
+  <img
+    src='/images/case-study/lumio-01.webp'
+    alt='Dashboard construído sobre o novo sistema de componentes'
+    className='w-full rounded-3xl'
+  />
+</div>
+
+## O que foi entregue
+
+**Mais de 60 componentes em 8 categorias** — formulários, navegação, exibição de dados, feedback, overlays, layout, tipografia e ações.
+
+Todo componente foi documentado no **Storybook** com exemplos ao vivo, tabelas de props e diretrizes de uso escritas para engenheiros — não para designers.
+
+> O que acelerou a adoção não foi a qualidade dos componentes — foi a documentação.
+
+Engenheiros não precisaram fazer perguntas porque as respostas já estavam lá. O sistema entrou no ar para o primeiro time na **semana 14**. Na **semana 16**, os quatro times de produto já tinham migrado suas sprints ativas para os novos componentes.
+
+## O que funcionou
+
+Auditar antes de projetar economizou semanas de retrabalho. Construir tokens primeiro deixou tudo mais rápido. Escrever a documentação enquanto construía — não depois — permitiu que o time adotasse imediatamente.
+
+## O que eu faria diferente
+
+Envolver engenheiros mais cedo na nomenclatura dos tokens — depois tive que renomear variáveis. Lançar uma v1 menor e mais rápida em vez de cobrir todos os casos extremos antes do lançamento.

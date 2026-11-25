@@ -9,6 +9,7 @@ import { getDay, isAfter, startOfDay } from 'date-fns'
 
 // Component Imports
 import { Button } from '@/components/ui/button'
+import { useLocale } from '@/components/locale-provider'
 import { Calendar, CalendarDayButton } from '@/components/ui/calendar'
 import { cn } from '@/lib/utils'
 
@@ -54,6 +55,7 @@ type ChooseTimeStepProps = {
 }
 
 const ChooseTimeStep = ({ selectedDate, onSelectDate, selectedTime, onSelectTime }: ChooseTimeStepProps) => {
+  const { dictionary } = useLocale()
   const timeSlotsRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -83,7 +85,7 @@ const ChooseTimeStep = ({ selectedDate, onSelectDate, selectedTime, onSelectTime
       {selectedDate && (
         <div ref={timeSlotsRef} className='space-y-4'>
           <div className='space-y-2'>
-            <p className='text-muted-foreground text-xs font-medium tracking-wide uppercase'>Morning</p>
+            <p className='text-muted-foreground text-xs font-medium tracking-wide uppercase'>{dictionary.selectService.morning}</p>
             <div className='grid grid-cols-3 gap-2'>
               {MORNING_SLOTS.map(time => (
                 <Button
@@ -103,7 +105,7 @@ const ChooseTimeStep = ({ selectedDate, onSelectDate, selectedTime, onSelectTime
           </div>
 
           <div className='space-y-2'>
-            <p className='text-muted-foreground text-xs font-medium tracking-wide uppercase'>Afternoon & Evening</p>
+            <p className='text-muted-foreground text-xs font-medium tracking-wide uppercase'>{dictionary.selectService.afternoonEvening}</p>
             <div className='grid grid-cols-4 gap-2'>
               {AFTERNOON_SLOTS.map(time => (
                 <Button
